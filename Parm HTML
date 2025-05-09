@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+<table id="sampleTable" border="1">
+  <tr>
+    <td>Row1 Col1</td>
+    <td>Row1 Col2</td>
+  </tr>
+  <tr>
+    <td>Row2 Col1</td>
+    <td>Row2 Col2</td>
+  </tr>
+    <tr>
+    <td>Row3 Col1</td>
+    <td>Row3 Col2</td>
+  </tr>
+    <tr>
+    <td>Row4 Col1</td>
+    <td>Row4 Col2</td>
+  </tr>
+    <tr>
+    <td>Row5 Col1</td>
+    <td>Row5 Col2</td>
+  </tr>
+</table><br>
+<input type="button" onclick="insertRowBottom()" value="Insert row">
+<input type="button" onclick="deleteRowTop()" value="delete row">
+<div id="message"></div>
+
+<script>
+
+// Get the table element
+let table = document.getElementById("sampleTable");
+// Get the message div element
+let messageDiv = document.getElementById("message");
+
+// Function to insert a row at the bottom
+function insertRowBottom() {
+  let wasEmpty = (table.rows.length === 0);
+  let newRow = table.insertRow(table.rows.length); // Insert at the end
+  let newCell1 = newRow.insertCell(0);
+  let newCell2 = newRow.insertCell(1);
+
+  // Get the current row count to update the text
+  let rowCount = table.rows.length;
+  newCell1.innerHTML = "Row" + rowCount + " Col1";
+  newCell2.innerHTML = "Row" + rowCount + " Col2";
+
+  // Clear the message if a row is inserted after being empty
+  if (wasEmpty) {
+    messageDiv.innerHTML = "";
+  }
+}
+
+// Function to delete the first row
+function deleteRowTop() {
+  if (table.rows.length > 0) { // Check if there are rows to delete
+    table.deleteRow(0); // Delete the first row (index 0)
+    // If the table becomes empty after deletion, display the message
+    if (table.rows.length === 0) {
+      messageDiv.innerHTML = "Message: No more rows to delete";
+    }
+  } else {
+    // If trying to delete when no rows exist, display the message
+    messageDiv.innerHTML = "Message: No more rows to delete";
+  }
+}
+
+</script>
+</body>
+</html>
